@@ -1,11 +1,11 @@
 {
-    "name": "react-native-rangeslider",
+    "name": "@m15r/react-native-range-slider",
     "description": "React Native Range Slider",
     "version": "1.0.1",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/m15r/react-native-rangeslider.git"
+        "url": "git+https://github.com/m15r/react-native-range-slider.git"
     },
     "author": "m15r",
     "dependencies": {
