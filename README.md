@@ -5,19 +5,19 @@ Installation
 
 Using Yarn:
 ```
-yarn add react-native-rangeslider
+yarn add @m15r/react-native-range-slider
 ```
 
 Using NPM:
 ```
-npm install react-native-rangeslider
+npm install @m15r/react-native-range-slider
 ```
 
 Example
 ---
 
 ```jsx
-import RangeSlider from 'react-native-rangeslider'
+import RangeSlider from '@m15r/react-native-range-slider'
 
 export default function RangeSliderExample() {
 
