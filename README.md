@@ -48,6 +48,7 @@ defaultValues | Initial values for the range slider | `[25,75]` | :white_check_m
 onChange      | Returns an array with min. and max. values |
 barHeight     | Height of the slider bar | `30` |
 barStyle      | Apply custom styling to the bar | `{}` |
+fillStyle     | Apply custom styling to the fill between handles | `{}` |
 handleSize    | Size of the handles | `30` |
 handleStyle   | Apply custom styling to the handles | `{}` |
 vibrate       | Vibrate when moving the handle using [react-native-haptic-feedback](https://github.com/junina-de/react-native-haptic-feedback) | `false` |
