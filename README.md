@@ -13,6 +13,8 @@ Using NPM:
 npm install @m15r/react-native-range-slider
 ```
 
+If you wish to use vibration when sliding the handles, follow the installation instructions for [react-native-haptic-feedback](https://github.com/junina-de/react-native-haptic-feedback) and enable the ```vibrate``` prop on your RangeSlider.
+
 Example
 ---
 
