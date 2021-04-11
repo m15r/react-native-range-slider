@@ -9,6 +9,7 @@
     },
     "author": "m15r",
     "dependencies": {
+        "react-native-gesture-handler": "^1.10.3",
         "react-native-haptic-feedback": "^1.11.0"
     },
     "devDependencies": {
