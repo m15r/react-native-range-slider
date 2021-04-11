@@ -48,6 +48,6 @@ barHeight     | Height of the slider bar | `30` |
 barStyle      | Apply custom styling to the bar | `{}` |
 handleSize    | Size of the handles | `30` |
 handleStyle   | Apply custom styling to the handles | `{}` |
-vibrate       | Vibrate when moving the handle | `true` |
+vibrate       | Vibrate when moving the handle | `false` |
 
 
