@@ -1,5 +1,5 @@
 # React Native Range Slider
-Range Slider for React Native using React Native Gesture Handler.
+Range Slider for React Native using [react-native-gesture-handler](https://www.npmjs.com/package/react-native-gesture-handler).
 
 Installation
 ---
