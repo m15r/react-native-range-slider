@@ -7,6 +7,7 @@ interface RangSliderProps {
     defaultValues?: number[]
     barHeight?: number
     barStyle?: any
+    fillStyle?: any
     handleSize?: number
     handleStyle?: any
     onChange?(range: number[]): any
@@ -18,6 +19,7 @@ function RangeSlider({
     defaultValues = [0,0],
     barHeight = 30,
     barStyle = {},
+    fillStyle = {},
     handleSize = 30,
     handleStyle = {},
     onChange = () => {},
@@ -27,8 +29,11 @@ function RangeSlider({
     const [ barWidth, setBarWidth ] = useState(300)
     const minValueRef = useRef(defaultValues[0])
     const maxValueRef = useRef(defaultValues[1])
+    const minPosX = useRef(0)
+    const maxPosX = useRef(0)
     const minTouchX = useRef(new Animated.Value(0)).current
     const maxTouchX = useRef(new Animated.Value(0)).current
+    const fillWidth = useRef(new Animated.Value(0)).current
     const unusedTouchX = useRef(new Animated.Value(0)).current
     const ReactNativeHapticFeedback = vibrate ? require('react-native-haptic-feedback').default : undefined
 
@@ -46,7 +51,7 @@ function RangeSlider({
     }
 
     const pixelRatio = () => {
-        return (range[1] - range[0]) / barWidth
+        return (range[1] - range[0]) / (barWidth - handleSize)
     }
     
 
@@ -54,8 +59,10 @@ function RangeSlider({
         const { absoluteX } = nativeEvent
         const value = Math.round(absoluteX * pixelRatio()) + range[0]
         if (value >= range[0] && value <= maxValueRef.current && value != minValueRef.current) {
+            minPosX.current = absoluteX
             minValueRef.current = value
             minTouchX.setValue(absoluteX)
+            fillWidth.setValue(maxPosX.current - minPosX.current)
             if (vibrate) triggerVibration()
             onChange([ minValueRef.current, maxValueRef.current ])
         }
@@ -65,8 +72,10 @@ function RangeSlider({
         const { absoluteX } = nativeEvent
         const value = Math.round(absoluteX * pixelRatio()) + range[0]
         if (value <= range[1] && value >= minValueRef.current && value != maxValueRef.current) {
+            maxPosX.current = absoluteX
             maxValueRef.current = value
             maxTouchX.setValue(absoluteX)
+            fillWidth.setValue(maxPosX.current - minPosX.current)
             if (vibrate) triggerVibration()
             onChange([ minValueRef.current, maxValueRef.current ])
         }
@@ -80,33 +89,40 @@ function RangeSlider({
         useNativeDriver: true, listener: onMaxValueChange
     })
 
-    const minTranslateX = minTouchX.interpolate({
-        inputRange: [ 0, barWidth - handleSize ],
-        outputRange: [ 0, barWidth - handleSize ],
-        extrapolate: 'clamp'
-    })
-
-    const maxTranslateX = maxTouchX.interpolate({
-        inputRange: [ 0, barWidth - handleSize ],
-        outputRange: [ 0, barWidth - handleSize ],
-        extrapolate: 'clamp',
-    })
-
     useEffect(() => {
-        minTouchX.setValue((minValueRef.current - range[0]) / pixelRatio())
-        maxTouchX.setValue((maxValueRef.current - range[0]) / pixelRatio())
+        const min = (minValueRef.current - range[0]) / pixelRatio()
+        const max = (maxValueRef.current - range[0]) / pixelRatio()
+        minPosX.current = min
+        maxPosX.current = max
+        minTouchX.setValue(min)
+        maxTouchX.setValue(max)
+        fillWidth.setValue(max - min)
     }, [ barWidth ])
 
-    const renderHandle = (translateX) => {
+    const renderFill = (minTranslateX: any) => {
+        return (
+            <Animated.View style={{
+                backgroundColor: '#333333',
+                height: barHeight,
+                left: handleSize / 2,
+                position: 'absolute',
+                transform: [{ translateX: minTranslateX }],
+                top: 0,
+                width: fillWidth,
+                ...fillStyle
+            }} />
+        )
+    }
+
+    const renderHandle = (translateX: any) => {
         return (
             <Animated.View style={{
                 aspectRatio: 1,
                 backgroundColor: 'white',
                 borderRadius: handleSize / 2,
                 height: undefined,
-                left: 0,
+                marginTop: -((handleSize - barHeight) / 2),
                 position: 'absolute',
-                top: -((handleSize - barHeight) / 2),
                 transform: [{ translateX: translateX }],
                 width: handleSize,
                 elevation: 1,
@@ -118,6 +134,18 @@ function RangeSlider({
             }} />
         )
     }
+
+    const minTranslateX = minTouchX.interpolate({
+        inputRange: [ 0, barWidth ],
+        outputRange: [ 0, barWidth ],
+        extrapolate: 'clamp'
+    })
+
+    const maxTranslateX = maxTouchX.interpolate({
+        inputRange: [ 0, barWidth ],
+        outputRange: [ 0, barWidth ],
+        extrapolate: 'clamp',
+    })
 
     return (
         <View>
@@ -132,6 +160,7 @@ function RangeSlider({
                     ...barStyle
                 }}
             >
+                {renderFill(minTranslateX)}
                 <PanGestureHandler onGestureEvent={onMinPanGestureEvent}>
                     {renderHandle(minTranslateX)}
                 </PanGestureHandler>
