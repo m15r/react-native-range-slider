@@ -31,8 +31,7 @@ export default function RangeSliderExample() {
     <RangeSlider
       range={[0,100]}
       defaultValues={[25,75]}
-      onChange={handleChange}
-      vibrate />
+      onChange={handleChange} />
   )
   
 }
