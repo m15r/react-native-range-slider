@@ -1,0 +1,17 @@
+{
+    "name": "react-native-rangeslider",
+    "description": "React Native Range Slider",
+    "version": "1.0.0",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/m15r/react-native-rangeslider.git"
+    },
+    "author": "m15r",
+    "dependencies": {
+        "react-native-haptic-feedback": "^1.11.0"
+    },
+    "devDependencies": {
+        "@types/node": "^14.11.2"
+    }
+}
