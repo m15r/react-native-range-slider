@@ -1,6 +1,7 @@
 # React Native Range Slider
 
-### Installation
+Installation
+---
 
 Using Yarn:
 ```
@@ -12,7 +13,8 @@ Using NPM:
 npm install react-native-rangeslider
 ```
 
-### Example
+Example
+---
 
 ```jsx
 import RangeSlider from 'react-native-rangeslider'
@@ -33,3 +35,19 @@ export default function RangeSliderExample() {
   
 }
 ```
+
+Props
+---
+
+Prop          | Description   | Default | Required |
+------------- | ------------- | ------------- | ------------- |
+range         | Array containing min. and max. values | `[0,100]` | :white_check_mark: |
+defaultValues | Initial values for the range slider | `[25,75]` | :white_check_mark: |
+onChange      | Returns an array with min. and max. values |
+barHeight     | Height of the slider bar | `30` |
+barStyle      | Apply custom styling to the bar | `{}` |
+handleSize    | Size of the handles | `30` |
+handleStyle   | Apply custom styling to the handles | `{}` |
+vibrate       | Vibrate when moving the handle | `true` |
+
+
