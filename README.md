@@ -1,8 +1,20 @@
 # React Native Range Slider
 
+### Installation
+
+Using Yarn:
+```
+yarn add react-native-rangeslider
+```
+
+Using NPM:
+```
+npm install react-native-rangeslider
+```
+
 ### Example
 
-```JSX
+```jsx
 import RangeSlider from 'react-native-rangeslider'
 
 export default function RangeSliderExample() {
